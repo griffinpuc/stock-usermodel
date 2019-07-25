@@ -1,0 +1,121 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title>SimpleLogin</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/css/signin.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0a8d489327.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+    <script src="https://www.vantajs.com/dist/vanta.waves.min.js"></script>
+
+</head>
+
+
+
+
+
+<body class="text-center" id="vanta" style="font-family: 'Work Sans', sans-serif;">
+
+    <!-- CENTERED MENU -->
+    <div class="col-lg-11" style="float: none; margin-left: auto; margin-right: auto; text-align: center; background-color: rgba(255, 255, 255, 1); width: 30vw; border-radius: 10px;">
+
+        <!-- LOG IN FORM -->
+        <form class="form-signin">
+            <img style="margin-bottom: 3vh; margin-top: 3vh;" class="mb-4" src="~/images/user.png" alt="" width="92" height="92">
+            <p style="margin-bottom: 3vh; font-size: 28pt;">Sign Up</p>
+
+            <!-- EMAIL INPUT -->
+            <div class="row">
+                <div class="col-xs-1" style="margin-top: 2vh;">
+                    <span style="float: left; margin-top: 0vh;"><i id="email-check" class="far fa-circle"></i></span>
+                </div>
+                <div class="col-lg-10">
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                </div>
+            </div>
+
+            <!-- PASSWORD INPUT -->
+            <div class="row" style="margin-top: 1.5vh;">
+                <div id="passwordInputCheck" class="col-xs-1" style="margin-top: 2vh;">
+                    <span style="float: left;"><i id="password-check" class="far fa-circle"></i></span>
+                </div>
+                <div class="col-lg-10">
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                </div>
+            </div>
+
+            <!-- PASSWORD CHECK INPUT -->
+            <div class="row">
+                <div class="col-xs-1" style="margin-top: 2vh;">
+                    <span style="float: left; margin-top: 0vh;"><i id="password-double-check" class="far fa-circle"></i></span>
+                </div>
+                <div class="col-lg-10">
+                    <label for="inputPasswordCheck" class="sr-only">Confirm Password</label>
+                    <input type="password" id="inputPasswordCheck" class="form-control" placeholder="Confirm Password" required>
+                </div>
+            </div>
+
+            <!-- CLOSING ELEMENTS -->
+            <button style="margin-top: 5vh;" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+            <p style="margin-top: 3vh;">Already have an account? <span><a>Sign in</a></span> here!</p>
+            <p style="margin-top: 5vh;" class="mt-5 mb-3 text-muted">&copy; Griffin Puc 2019</p>
+        </form>
+
+    </div>
+
+</body>
+
+<script>
+    VANTA.WAVES({
+        el: "#vanta",
+        color: 0x314abb,
+        shininess: 78.00,
+        waveHeight: 22.50,
+        waveSpeed: 1.35,
+        zoom: 0.85
+    })
+</script>
+
+<script>
+
+    var typingTimer;
+    var doneTypingInterval = 1500;
+    var $input = $('#inputPassword');
+
+    //on keyup, start the countdown
+    $input.on('keyup', function () {
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown
+    $input.on('keydown', function () {
+        alert('DOWN');
+        clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping() {
+        var password = document.getElementById("inputPassword");
+
+        if (password.length > 8) {
+            document.getElementById("passwordInputCheck").innerHTML = "<span style="float: left; "><i id="password - check" class="fa fa - check - circle"></i></span>";
+
+        }
+
+    }
+
+</script>
+
+</html>
+
+
