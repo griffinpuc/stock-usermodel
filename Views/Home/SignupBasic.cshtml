@@ -12,6 +12,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0a8d489327.js"></script>
+    <link href="~/css/animate.css" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
     <script src="https://www.vantajs.com/dist/vanta.waves.min.js"></script>
@@ -50,7 +51,7 @@
                 </div>
                 <div class="col-lg-10">
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <input type="password" pattern=".{8,}" required title="8 characters minimum" id="inputPassword" class="form-control" placeholder="Password" required>
                 </div>
             </div>
 
@@ -71,6 +72,76 @@
             <p style="margin-top: 5vh;" class="mt-5 mb-3 text-muted">&copy; Griffin Puc 2019</p>
         </form>
 
+        <script>
+
+            var typingTimer;
+            var doneTypingInterval = 500;
+            var $input = $('#inputPassword');
+            var $input2 = $('#inputPasswordCheck');
+            var $input3 = $('#inputEmail');
+
+            //on keyup, start the countdown
+            $input.on('keyup', function () {
+                typingTimer = setTimeout(doneTyping("inputPassword", "password-check"), doneTypingInterval);
+            });
+
+            //on keyup2, start the countdown
+            $input2.on('keyup', function () {
+                typingTimer = setTimeout(doneTypingPassCheck("inputPasswordCheck", "password-double-check"), doneTypingInterval);
+            });
+
+            //on keyup3, start the countdown
+            $input3.on('keyup', function () {
+                typingTimer = setTimeout(doneTypingEmail("inputEmail", "email-check"), doneTypingInterval);
+            });
+
+            //on keydown, clear the countdown
+            $input.on('keydown', function () {
+                clearTimeout(typingTimer);
+            });
+
+            //user is "finished typing," do something
+            function doneTyping(elName, checkName) {
+                var password = document.getElementById(elName).value;
+
+                if (password.length < 8) {
+                    document.getElementById(checkName).className = "animated wobble far fa-circle";
+                }
+
+                if (password.length >= 8) {
+                    document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
+
+                }
+
+            }
+
+            function doneTypingEmail(elName, checkName) {
+                var email = document.getElementById(elName).value;
+
+                if (/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(email)) {
+                    document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
+                }
+                else{
+                    document.getElementById(checkName).className = "animated wobble far fa-circle";
+                }
+
+            }
+
+            function doneTypingPassCheck(elName, checkName) {
+                var password = document.getElementById(elName).value;
+                var origPassword = document.getElementById("inputPassword").value;
+
+                if (password == origPassword) {
+                    document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
+                }
+                else{
+                    document.getElementById(checkName).className = "animated wobble far fa-circle";
+                }
+
+            }
+
+        </script>
+
     </div>
 
 </body>
@@ -84,36 +155,6 @@
         waveSpeed: 1.35,
         zoom: 0.85
     })
-</script>
-
-<script>
-
-    var typingTimer;
-    var doneTypingInterval = 1500;
-    var $input = $('#inputPassword');
-
-    //on keyup, start the countdown
-    $input.on('keyup', function () {
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    });
-
-    //on keydown, clear the countdown
-    $input.on('keydown', function () {
-        alert('DOWN');
-        clearTimeout(typingTimer);
-    });
-
-    //user is "finished typing," do something
-    function doneTyping() {
-        var password = document.getElementById("inputPassword");
-
-        if (password.length > 8) {
-            document.getElementById("passwordInputCheck").innerHTML = "<span style="float: left; "><i id="password - check" class="fa fa - check - circle"></i></span>";
-
-        }
-
-    }
-
 </script>
 
 </html>
