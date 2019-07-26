@@ -10,9 +10,21 @@ namespace SimpleLoginForm.Controllers
 {
     public class HomeController : Controller
     {
+
+        private DatabaseContext _context;
+        private SafeVerify _safeVerify;
+
+        public HomeController(DatabaseContext context)
+        {
+            _context = context;
+            _safeVerify = new SafeVerify(context);
+        }
+
+        
+
         public IActionResult Index()
         {
-            return View("LoginBasic");
+            return View("Parent_Index");
         }
 
         public IActionResult LoginBasic()
@@ -25,7 +37,48 @@ namespace SimpleLoginForm.Controllers
             return View();
         }
 
-        //public void SignUp()
+        public IActionResult Parent_Index()
+        {
+            return View();
+        }
+
+        public IActionResult Profile(string email)
+        {
+            return View();
+        }
+
+        public PartialViewResult SwitchToSignup()
+        {
+            return PartialView("Partial_Signup");
+        }
+
+        public PartialViewResult SwitchToLogin()
+        {
+            return PartialView("Partial_Login");
+        }
+
+        public ActionResult SecureSignUp(string inputEmail, string inputUsername, string inputPassword)
+        {
+            if(_safeVerify.secureCreation(inputEmail, inputPassword, inputUsername))
+            {
+                return null; //return page here
+            }
+
+            return null;
+        }
+
+        public ActionResult SecureLogIn(string inputEmail, string inputPassword)
+        {
+            if(_safeVerify.secureLogin(inputEmail, inputPassword))
+            {
+                return View("Profile");
+            }
+            else
+            {
+                return View(); //return other view
+            }
+            
+        }
 
     }
 }

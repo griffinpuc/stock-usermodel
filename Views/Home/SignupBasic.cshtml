@@ -21,128 +21,62 @@
 
 
 
-
-
 <body class="text-center" id="vanta" style="font-family: 'Work Sans', sans-serif;">
+
 
     <!-- CENTERED MENU -->
     <div class="col-lg-11" style="float: none; margin-left: auto; margin-right: auto; text-align: center; background-color: rgba(255, 255, 255, 1); width: 30vw; border-radius: 10px;">
+        
+        @using (Html.BeginForm("SecureSignUp", "Home", FormMethod.Post))
+        {
+            <!-- LOG IN FORM -->
+            <div class="form-signin" id="loginForm">
+                <img style="margin-bottom: 3vh; margin-top: 3vh;" class="mb-4" src="~/images/user.png" alt="" width="92" height="92">
+                <p style="margin-bottom: 3vh; font-size: 28pt;">Sign Up</p>
 
-        <!-- LOG IN FORM -->
-        <form class="form-signin">
-            <img style="margin-bottom: 3vh; margin-top: 3vh;" class="mb-4" src="~/images/user.png" alt="" width="92" height="92">
-            <p style="margin-bottom: 3vh; font-size: 28pt;">Sign Up</p>
+                <!-- EMAIL INPUT -->
+                <div class="row">
+                    <div class="col-xs-1" style="margin-top: 2vh;">
+                        <span style="float: left; margin-top: 0vh;"><i id="email-check" class="far fa-circle"></i></span>
+                    </div>
+                    <div class="col-lg-10">
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input name="inputEmail" asp-for="inputEmail" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    </div>
+                </div>
 
-            <!-- EMAIL INPUT -->
-            <div class="row">
-                <div class="col-xs-1" style="margin-top: 2vh;">
-                    <span style="float: left; margin-top: 0vh;"><i id="email-check" class="far fa-circle"></i></span>
+                <!-- PASSWORD INPUT -->
+                <div class="row" style="margin-top: 1.5vh;">
+                    <div id="passwordInputCheck" class="col-xs-1" style="margin-top: 2vh;">
+                        <span style="float: left;"><i id="password-check" class="far fa-circle"></i></span>
+                    </div>
+                    <div class="col-lg-10">
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input name="inputPassword" asp-for="inputPassword" type="password" pattern=".{8,}" required title="8 characters minimum" id="inputPassword" class="form-control" placeholder="Password">
+                    </div>
                 </div>
-                <div class="col-lg-10">
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+                <!-- PASSWORD CHECK INPUT -->
+                <div class="row">
+                    <div class="col-xs-1" style="margin-top: 2vh;">
+                        <span style="float: left; margin-top: 0vh;"><i id="password-double-check" class="far fa-circle"></i></span>
+                    </div>
+                    <div class="col-lg-10">
+                        <label for="inputPasswordCheck" class="sr-only">Confirm Password</label>
+                        <input asp-for="inputPasswordCheck" type="password" id="inputPasswordCheck" class="form-control" placeholder="Confirm Password" required>
+                    </div>
                 </div>
+
+                <!-- CLOSING ELEMENTS -->
+                <button style="margin-top: 5vh;" onclick="submitForm()" class="btn btn-lg btn-primary btn-block">Sign up</button>
+                <p style="margin-top: 3vh;">Already have an account? <span><a>Sign in</a></span> here!</p>
+                <p style="margin-top: 5vh;" class="mt-5 mb-3 text-muted">&copy; Griffin Puc 2019</p>
             </div>
+        }
 
-            <!-- PASSWORD INPUT -->
-            <div class="row" style="margin-top: 1.5vh;">
-                <div id="passwordInputCheck" class="col-xs-1" style="margin-top: 2vh;">
-                    <span style="float: left;"><i id="password-check" class="far fa-circle"></i></span>
-                </div>
-                <div class="col-lg-10">
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" pattern=".{8,}" required title="8 characters minimum" id="inputPassword" class="form-control" placeholder="Password" required>
-                </div>
-            </div>
+    <script src="~/js/signup/signup.js"></script>
 
-            <!-- PASSWORD CHECK INPUT -->
-            <div class="row">
-                <div class="col-xs-1" style="margin-top: 2vh;">
-                    <span style="float: left; margin-top: 0vh;"><i id="password-double-check" class="far fa-circle"></i></span>
-                </div>
-                <div class="col-lg-10">
-                    <label for="inputPasswordCheck" class="sr-only">Confirm Password</label>
-                    <input type="password" id="inputPasswordCheck" class="form-control" placeholder="Confirm Password" required>
-                </div>
-            </div>
-
-            <!-- CLOSING ELEMENTS -->
-            <button style="margin-top: 5vh;" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-            <p style="margin-top: 3vh;">Already have an account? <span><a>Sign in</a></span> here!</p>
-            <p style="margin-top: 5vh;" class="mt-5 mb-3 text-muted">&copy; Griffin Puc 2019</p>
-        </form>
-
-        <script>
-
-            var typingTimer;
-            var doneTypingInterval = 500;
-            var $input = $('#inputPassword');
-            var $input2 = $('#inputPasswordCheck');
-            var $input3 = $('#inputEmail');
-
-            //on keyup, start the countdown
-            $input.on('keyup', function () {
-                typingTimer = setTimeout(doneTyping("inputPassword", "password-check"), doneTypingInterval);
-            });
-
-            //on keyup2, start the countdown
-            $input2.on('keyup', function () {
-                typingTimer = setTimeout(doneTypingPassCheck("inputPasswordCheck", "password-double-check"), doneTypingInterval);
-            });
-
-            //on keyup3, start the countdown
-            $input3.on('keyup', function () {
-                typingTimer = setTimeout(doneTypingEmail("inputEmail", "email-check"), doneTypingInterval);
-            });
-
-            //on keydown, clear the countdown
-            $input.on('keydown', function () {
-                clearTimeout(typingTimer);
-            });
-
-            //user is "finished typing," do something
-            function doneTyping(elName, checkName) {
-                var password = document.getElementById(elName).value;
-
-                if (password.length < 8) {
-                    document.getElementById(checkName).className = "animated wobble far fa-circle";
-                }
-
-                if (password.length >= 8) {
-                    document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
-
-                }
-
-            }
-
-            function doneTypingEmail(elName, checkName) {
-                var email = document.getElementById(elName).value;
-
-                if (/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(email)) {
-                    document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
-                }
-                else{
-                    document.getElementById(checkName).className = "animated wobble far fa-circle";
-                }
-
-            }
-
-            function doneTypingPassCheck(elName, checkName) {
-                var password = document.getElementById(elName).value;
-                var origPassword = document.getElementById("inputPassword").value;
-
-                if (password == origPassword) {
-                    document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
-                }
-                else{
-                    document.getElementById(checkName).className = "animated wobble far fa-circle";
-                }
-
-            }
-
-        </script>
-
-    </div>
+        </div>
 
 </body>
 

@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace SimpleLoginForm.Models
 {
-    public class Encrypt
+    public class SafeVerify
     {
+
+        private DatabaseContext _context;
+
+        public SafeVerify(DatabaseContext context)
+        {
+            _context = context;
+        }
 
         /* Compute hash from string */
         public string computeHash(string value)
@@ -27,17 +34,33 @@ namespace SimpleLoginForm.Models
             return Sb.ToString();
         }
 
-        public bool secureLogin(string email, string password, string address)
+        public bool secureLogin(string email, string password)
         {
-            bool ret = false;
-            return ret;
+            bool retval = false;
+
+            if (_context.GetAccount(email).password.Equals(password))
+            {
+                retval = true;
+            }
+
+            return retval;
         }
 
-        public bool secureCreation(string email, string password, string address)
+        public bool secureCreation(string email, string password, string uname)
         {
             bool ret = false;
 
+            AccountModel newAccount = new AccountModel() {username = uname, email = email, password = computeHash(password) };
 
+            try
+            {
+                _context.addEntry(newAccount);
+                ret = true;
+            }
+            catch
+            {
+                //???
+            }
 
             return ret;
         }

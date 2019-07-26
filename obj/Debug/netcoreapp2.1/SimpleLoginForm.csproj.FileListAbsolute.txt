@@ -22,4 +22,7 @@ C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\n
 C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\SimpleLoginForm.csproj.CopyComplete
 C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Home\LoginBasic.g.cshtml.cs
 C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Home\SignupBasic.g.cshtml.cs
-C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Home\LoginParent.g.cshtml.cs
+C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Home\Partial_Login.g.cshtml.cs
+C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Home\Partial_Signup.g.cshtml.cs
+C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Home\Parent_Index.g.cshtml.cs
+C:\Users\griff\Workspace\simplelogin\SimpleLoginForm\SimpleLoginForm\obj\Debug\netcoreapp2.1\Razor\Views\Secure\Profile.g.cshtml.cs
