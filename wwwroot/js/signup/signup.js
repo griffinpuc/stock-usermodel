@@ -3,7 +3,7 @@ var doneTypingInterval = 500;
 var $input = $('#inputPassword');
 var $input2 = $('#inputPasswordCheck');
 var $input3 = $('#inputEmail');
-var $input4 = $('#inputUsername')
+var $input4 = $('#inputUsername');  
 
 var emailVerif = false;
 var passVerif1 = false;
@@ -46,26 +46,14 @@ function doneTyping(elName, checkName) {
 
 }
 
-//user is "finished typing," do something
-function doneTypingUsername(elName, checkName) {
-    var username = document.getElementById(elName).value;
-
-    if (username.length >= 4) {
-        document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
-        usernameVerif = true;
-    }
-    else {
-        document.getElementById(checkName).className = "animated wobble far fa-circle";
-        usernameVerif =  false;
-    }
-
-}
-
 function doneTypingEmail(elName, checkName) {
     var email = document.getElementById(elName).value;
 
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         document.getElementById(checkName).className = "animated bounce fa fa-check-circle";
+
+        if()
+
         emailVerif = true;
     }
     else {

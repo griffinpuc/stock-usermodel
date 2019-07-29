@@ -57,9 +57,21 @@ namespace SimpleLoginForm.Controllers
             return PartialView("Partial_Login");
         }
 
-        public ActionResult SecureSignUp(string inputEmail, string inputUsername, string inputPassword)
+        public bool VerifyEmail(string email)
         {
-            if(_safeVerify.secureCreation(inputEmail, inputPassword, inputUsername))
+            bool retval = false;
+
+            if (_safeVerify.verifyEmail(email))
+            {
+                retval = true;
+            }
+
+            return retval;
+        }
+
+        public ActionResult SecureSignUp(string inputEmail, string inputPassword)
+        {
+            if(_safeVerify.secureCreation(inputEmail, inputPassword))
             {
                 return null; //return page here
             }

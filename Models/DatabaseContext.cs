@@ -60,5 +60,18 @@ namespace SimpleLoginForm.Models
 
             return retval;
         }
+
+        public bool VerifyEmail(string email)
+        {
+            if((from AccountModel in accountsTable where AccountModel.email == email select AccountModel).ToArray().Length == 1)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
     }
 }

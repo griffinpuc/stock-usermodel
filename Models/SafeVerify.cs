@@ -46,11 +46,11 @@ namespace SimpleLoginForm.Models
             return retval;
         }
 
-        public bool secureCreation(string email, string password, string uname)
+        public bool secureCreation(string email, string password)
         {
             bool ret = false;
 
-            AccountModel newAccount = new AccountModel() {username = uname, email = email, password = computeHash(password) };
+            AccountModel newAccount = new AccountModel() {email = email, password = computeHash(password) };
 
             try
             {
@@ -63,6 +63,19 @@ namespace SimpleLoginForm.Models
             }
 
             return ret;
+        }
+
+        public bool verifyEmail(string email)
+        {
+            if (_context.VerifyEmail(email))
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
         }
 
     }
